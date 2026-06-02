@@ -12,6 +12,9 @@ Project Components:
     Child Component Two: Displays the results from the search query.
     Additional Features: Buttons for editing, deleting, and adding contacts.
 
+    <img width="554" height="310" alt="image" src="https://github.com/user-attachments/assets/14b20b4c-39f8-4721-ba19-f658838c9fd2" />
+
+
 Key Functionalities:
 
     Search Functionality: Users can search for contacts based on input from the search bar.
