@@ -1,10 +1,11 @@
 <template>
-    {searchTextChild2}
+    
     {currentId}
     {currentName}
-    <lightning-datatable
+
+    <lightning-datatable 
     key-field=""
-    data={rows}
+    data={accountRecords.data}
     columns={columns}
     hide-checkbox-column="true"
     show-row-number-column="true"
