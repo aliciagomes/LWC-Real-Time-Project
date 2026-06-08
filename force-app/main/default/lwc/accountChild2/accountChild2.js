@@ -18,12 +18,6 @@ export default class AccountChild2 extends LightningElement {
     //[] defines array
     //{} defines object
 
-    rows=[
-        {Id:'23', Name:'Parag Jambhulkar'},
-        {Id:'30', Name:'Mayur Chavan'},
-        {Id:'33', Name:'Yogesh Handge'},
-        {Id:'40', Name:'Manish Jansari'}
-    ]
 
     currentId;
     currentName;
