@@ -1,7 +1,21 @@
 <template>
-    <lightning-card title='Contacts' >
-      Show Account Contacts
-      AccountId={accountId}<br>
-      AccountName={accountName}
-    </lightning-card>
+  <lightning-card title={title}>
+    <template if:true={hasContacts}>
+    <template for:each={contacts} for:item="contact">
+      <lightning-layout key={contact.Id} class="slds-box slds-m-around_small">
+        <lightning-layout-item>
+          <b>{contact.Name}</b>
+        </lightning-layout-item>
+      </lightning-layout>
+    </template>
+    </template>
+
+
+     <template if:false={hasContacts}>
+      <div class="slds-align_absolute-center">
+      No Contacts Found
+      </div>
+      </template>
+
+  </lightning-card>
 </template>
