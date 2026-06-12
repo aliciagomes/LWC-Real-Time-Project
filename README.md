@@ -97,15 +97,6 @@ Used for authentication, metadata deployment, and project management.
 * Apply CRUD operations using Salesforce data
 * Build a scalable and maintainable Salesforce application
 
----
 
-## Future Enhancements
-
-* Pagination for search results
-* Advanced filtering options
-* Real-time updates using Lightning Message Service
-* Data validation and error handling improvements
-* Unit tests using Jest
-* Enhanced user experience and accessibility
 
 
