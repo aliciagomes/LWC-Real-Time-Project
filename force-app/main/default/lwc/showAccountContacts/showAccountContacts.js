@@ -1,7 +1,10 @@
 import { MessageContext, subscribe, unsubscribe } from 'lightning/messageService';
-import { LightningElement, wire } from 'lwc';
+import { api, LightningElement, wire } from 'lwc';
 import ComrevoChannel from '@salesforce/messageChannel/ComrevoChannel__c';
 import getAccountContacts from '@salesforce/apex/AccountClass.getAccountContacts';
+import LightningConfirm from 'lightning/confirm';
+import { deleteRecord } from 'lightning/uiRecordApi';
+import { ShowToastEvent } from "lightning/platformShowToastEvent";
 
 export default class ShowAccountContacts extends LightningElement {
  
@@ -12,6 +15,11 @@ export default class ShowAccountContacts extends LightningElement {
     accountName;
     contacts;
     hasContacts;
+    isAccountSelected=false;
+    isAddContactClicked=false;
+    isEditClicked=false;
+    @api recordId;
+    editableContactId;
     
     connectedCallback()
     {
@@ -44,6 +52,7 @@ export default class ShowAccountContacts extends LightningElement {
     {
         this.contacts=await getAccountContacts({accountId: this.accountId});
         this.hasContacts=this.contacts.length>0?true:false;
+        this.isAccountSelected=true;
     }
 
     handleUnsubscribe()
@@ -52,4 +61,59 @@ export default class ShowAccountContacts extends LightningElement {
         this.subscription=null;
         
     }
+
+    handleAddContact(event)
+    {
+     this.isAddContactClicked=true;
+    }
+
+    handleAddContactCancel(event)
+    {
+      this.isAddContactClicked=false;
+    }
+
+    handleEdit(event)
+    {
+     this.isEditClicked=true;
+     this.editableContactId = event.target.dataset.contactId;
+    }
+
+    handleEditCancel(event)
+    {
+      this.isEditClicked=false;
+    }
+
+    handleSuccess(event)
+    {
+         this.isAddContactClicked=false;
+         this.getContacts();
+         this.isEditClicked=false;
+
+    }
+
+    async handleDelete(event)
+    {
+        this.editableContactId = event.target.dataset.contactId;
+      const result = await LightningConfirm.open({
+            message: 'Are you sure you want to delete contact?',
+            label: 'Confirm deletion?',
+            theme: 'warning',
+        });
+
+        if(result)
+        {
+           let deleteResult=await deleteRecord(this.editableContactId);
+           this.getContacts();
+           this.showToast();
+        }
+    }
+
+     showToast() {
+    const event = new ShowToastEvent({
+      title: "Delete Contact",
+      message:
+        "Contact is deleted successfully.",
+    });
+    this.dispatchEvent(event);
+  }
 } 
