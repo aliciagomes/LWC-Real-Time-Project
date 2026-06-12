@@ -4,6 +4,10 @@
 
 **Organization's Accounts and Contacts Management**
 
+<p align="center">
+  <img src="./imagem/projectLWC.png" width="1000">
+</p>
+
 ## Overview
 
 This project aims to build a user-friendly interface for managing Accounts and Contacts in Salesforce. The application leverages Lightning Web Components (LWC) to provide an interactive, responsive, and efficient user experience.
